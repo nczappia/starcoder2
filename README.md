@@ -35,10 +35,13 @@ export HF_TOKEN=xxx
 ```
 
 ## Model usage and memory footprint
-Here are some examples to load the model and generate code. Ensure you've installed `transformers` from source (it should be the case if you used `requirements.txt`). We also include the memory footprint of the largest model, `StarCoder2-15B`, for each setup.
+Here are some examples to load the model and generate code, with the memory footprint of the largest model, `StarCoder2-15B`. Ensure you've installed `transformers` from source (it should be the case if you used `requirements.txt`)
+```bash
+pip install git+https://github.com/huggingface/transformers.git
+```
 
-
-### Running the model on CPU/ one GPU / multi GPU
+### Running the model on CPU/GPU/multi GPU
+* _Using full precision_
 ```python
 # pip install git+https://github.com/huggingface/transformers.git # TODO: merge PR to main
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -55,10 +58,7 @@ outputs = model.generate(inputs)
 print(tokenizer.decode(outputs[0]))
 ```
 
-### Running the model on a GPU using different precisions
-
 * _Using `torch.bfloat16`_
-
 ```python
 # pip install accelerate
 import torch
@@ -79,7 +79,7 @@ print(tokenizer.decode(outputs[0]))
 Memory footprint: 32251.33 MB
 ```
 
-#### Quantized Versions through `bitsandbytes`
+### Quantized Versions through `bitsandbytes`
 * _Using 8-bit precision (int8)_
 
 ```python
@@ -117,7 +117,8 @@ pipe = pipeline("text-generation", model=model, tokenizer=tokenizer, device=0)
 print( pipe("def hello():") )
 ```
 
-## Text-generation-inference: TODO
+## Text-generation-inference: 
+TODO
 
 ```bash
 docker run -p 8080:80 -v $PWD/data:/data -e HUGGING_FACE_HUB_TOKEN=<YOUR BIGCODE ENABLED TOKEN> -d  ghcr.io/huggingface/text-generation-inference:latest --model-id bigcode/starcoder2-15b --max-total-tokens 8192
