@@ -74,7 +74,7 @@ inputs = tokenizer.encode("def print_hello_world():", return_tensors="pt").to("c
 outputs = model.generate(inputs)
 print(tokenizer.decode(outputs[0]))
 ```
-```python
+```bash
 >>> print(f"Memory footprint: {model.get_memory_footprint() / 1e6:.2f} MB")
 Memory footprint: 32251.33 MB
 ```
