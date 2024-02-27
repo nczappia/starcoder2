@@ -38,8 +38,9 @@ def get_args():
     parser.add_argument("--lr_scheduler_type", type=str, default="cosine")
     parser.add_argument("--warmup_steps", type=int, default=100)
     parser.add_argument("--seed", type=int, default=0)
-    parser.add_argument("--output_dir", type=str, default="outputs")
+    parser.add_argument("--output_dir", type=str, default="finetune_starcoder2")
     parser.add_argument("--num_proc", type=int, default=None)
+    parser.add_argument("--push_to_hub", type=bool, default=True)
     return parser.parse_args()
 
 
@@ -130,6 +131,8 @@ def main(args):
 
     print("Saving the last checkpoint of the model")
     model.save_pretrained(os.path.join(args.output_dir, "final_checkpoint/"))
+    if args.push_to_hub:
+        trainer.push_to_hub("Upload model")
     print("Training Done! 💥")
 
 
