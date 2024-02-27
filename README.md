@@ -127,7 +127,7 @@ For more details, see [here](https://github.com/huggingface/text-generation-infe
 
 # Fine-tuning
 
-Here, we showcase how you can fine-tune StarCoder2 models.
+Here, we showcase how you can fine-tune StarCoder2 models. For more fine-tuning resources you can check [StarCoder's GitHub repository](https://github.com/bigcode-project/starcoder) and [SantaCoder-Finetuning](https://github.com/loubnabnl/santacoder-finetuning).
 
 ## Setup
 
