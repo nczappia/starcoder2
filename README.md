@@ -165,4 +165,4 @@ accelerate launch finetune.py \
 If you want to fine-tune on other text datasets, you need to change `dataset_text_field` argument to the name of the column containing the code/text you want to train on.
  
 # Evaluation
-To evaluate StarCoder2 and its derivatives, you can use the [BigCode-Evaluation-Harness](https://github.com/bigcode-project/bigcode-evaluation-harness) for evaluating Code LLMs.
+To evaluate StarCoder2 and its derivatives, you can use the [BigCode-Evaluation-Harness](https://github.com/bigcode-project/bigcode-evaluation-harness) for evaluating Code LLMs. You can also check the [BigCode Leaderboard](https://huggingface.co/spaces/bigcode/bigcode-models-leaderboard).
