@@ -3,7 +3,7 @@
 <p align="center"><a href="https://huggingface.co/bigcode">[🤗 Models & Datasets]</a> | <a href="https://drive.google.com/file/d/17iGn3c-sYNiLyRSY-A85QOzgzGnGiVI3/view">[Paper]</a></a> 
 </p>
 
-StarCoder2 is a family of code generation models (3B, 7B, and 15B), trained on 600+ programming languages from [The Stack v2]() and some natural language text such as Wikipedia, Arxiv, and GitHub issues. The models use Grouped Query Attention, a context window of 16,384 tokens, with sliding window attention of 4,096 tokens. The 3B & 7B models were trained on 3+ trillion tokens, while the 15B was trained on 4+ trillion tokens.
+StarCoder2 is a family of code generation models (3B, 7B, and 15B), trained on 600+ programming languages from [The Stack v2](https://huggingface.co/datasets/bigcode/the-stack-v2) and some natural language text such as Wikipedia, Arxiv, and GitHub issues. The models use Grouped Query Attention, a context window of 16,384 tokens, with sliding window attention of 4,096 tokens. The 3B & 7B models were trained on 3+ trillion tokens, while the 15B was trained on 4+ trillion tokens. For more details check out the [paper](https://drive.google.com/file/d/17iGn3c-sYNiLyRSY-A85QOzgzGnGiVI3/view).
 
 # Table of Contents
 1. [Quickstart](#quickstart)
