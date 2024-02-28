@@ -86,7 +86,6 @@ def main(args):
         args.model_id,
         quantization_config=bnb_config,
         device_map={"": PartialState().process_index},
-        token=token,
         attention_dropout=args.attention_dropout,
     )
     print_trainable_parameters(model)
