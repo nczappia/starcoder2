@@ -5,14 +5,6 @@
 
 StarCoder2 is a family of code generation models (3B, 7B, and 15B), trained on 600+ programming languages from [The Stack v2]() and some natural language text such as Wikipedia, Arxiv, and GitHub issues. The models use Grouped Query Attention, a context window of 16,384 tokens, with sliding window attention of 4,096 tokens. The 3B & 7B models were trained on 3+ trillion tokens, while the 15B was trained on 4+ trillion tokens.
 
-
-# Disclaimer
-
-Before you can use the models, go to `hf.co/bigcode/starcoder2-15b` and accept the agreement, and make sure you are logged into the Hugging Face hub:
-```bash
-huggingface-cli login
-```
-
 # Table of Contents
 1. [Quickstart](#quickstart)
     - [Installation](#installation)
