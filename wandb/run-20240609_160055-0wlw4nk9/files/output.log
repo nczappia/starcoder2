@@ -1,0 +1,36 @@
+
+{'loss': 1.5019, 'grad_norm': 0.10998395830392838, 'learning_rate': 1e-05, 'epoch': 0.0013119055428009183}
+{'loss': 1.4046, 'grad_norm': 0.23347632586956024, 'learning_rate': 2e-05, 'epoch': 0.0026238110856018366}
+{'loss': 1.5588, 'grad_norm': 0.19942286610603333, 'learning_rate': 1.9999950454033063e-05, 'epoch': 0.003935716628402755}
+Traceback (most recent call last):
+  File "/home/nich/CodeInjection/models/starcoder2/finetune.py", line 179, in <module>
+    main(args)
+  File "/home/nich/CodeInjection/models/starcoder2/finetune.py", line 163, in main
+    trainer.train()
+  File "/home/nich/enter/envs/starcoder2/lib/python3.9/site-packages/trl/trainer/sft_trainer.py", line 440, in train
+    output = super().train(*args, **kwargs)
+  File "/home/nich/enter/envs/starcoder2/lib/python3.9/site-packages/transformers/trainer.py", line 1885, in train
+    return inner_training_loop(
+  File "/home/nich/enter/envs/starcoder2/lib/python3.9/site-packages/transformers/trainer.py", line 2216, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+  File "/home/nich/enter/envs/starcoder2/lib/python3.9/site-packages/transformers/trainer.py", line 3241, in training_step
+    torch.cuda.empty_cache()
+  File "/home/nich/enter/envs/starcoder2/lib/python3.9/site-packages/torch/cuda/memory.py", line 162, in empty_cache
+    torch._C._cuda_emptyCache()
+KeyboardInterrupt
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/home/nich/CodeInjection/models/starcoder2/finetune.py", line 179, in <module>
+[rank0]:     main(args)
+[rank0]:   File "/home/nich/CodeInjection/models/starcoder2/finetune.py", line 163, in main
+[rank0]:     trainer.train()
+[rank0]:   File "/home/nich/enter/envs/starcoder2/lib/python3.9/site-packages/trl/trainer/sft_trainer.py", line 440, in train
+[rank0]:     output = super().train(*args, **kwargs)
+[rank0]:   File "/home/nich/enter/envs/starcoder2/lib/python3.9/site-packages/transformers/trainer.py", line 1885, in train
+[rank0]:     return inner_training_loop(
+[rank0]:   File "/home/nich/enter/envs/starcoder2/lib/python3.9/site-packages/transformers/trainer.py", line 2216, in _inner_training_loop
+[rank0]:     tr_loss_step = self.training_step(model, inputs)
+[rank0]:   File "/home/nich/enter/envs/starcoder2/lib/python3.9/site-packages/transformers/trainer.py", line 3241, in training_step
+[rank0]:     torch.cuda.empty_cache()
+[rank0]:   File "/home/nich/enter/envs/starcoder2/lib/python3.9/site-packages/torch/cuda/memory.py", line 162, in empty_cache
+[rank0]:     torch._C._cuda_emptyCache()
+[rank0]: KeyboardInterrupt

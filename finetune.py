@@ -1,5 +1,8 @@
 # Code adapted from https://github.com/huggingface/trl/blob/main/examples/research_projects/stack_llama/scripts/supervised_finetuning.py
 # and https://huggingface.co/blog/gemma-peft
+
+# Command: accelerate launch finetune.py         --model_id "bigcode/starcoder2-7b"         --dataset_name "iamtarun/code_instructions_120k_alpaca"         --subset "data/train-00000-of-00001-d9b93805488c263e.parquet"         --dataset_text_field "output"         --split "train"         --max_seq_length 1024         --max_steps 10000         --micro_batch_size 1         --gradient_accumulation_steps 8         --learning_rate 2e-5         --warmup_steps 20         --num_proc "$(nproc)"
+
 import argparse
 import multiprocessing
 import os
@@ -21,8 +24,8 @@ from trl import SFTTrainer
 def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--model_id", type=str, default="bigcode/starcoder2-3b")
-    parser.add_argument("--dataset_name", type=str, default="the-stack-smol")
-    parser.add_argument("--subset", type=str, default="data/rust")
+    parser.add_argument("--dataset_name", type=str, default="code_instructions_120k_alpaca")
+    parser.add_argument("--subset", type=str, default="data/train-00000-of-00001-d9b93805488c263e.parquet")
     parser.add_argument("--split", type=str, default="train")
     parser.add_argument("--dataset_text_field", type=str, default="content")
 
@@ -82,21 +85,58 @@ def main(args):
 
     # load model and dataset
     token = os.environ.get("HF_TOKEN", None)
-    model = AutoModelForCausalLM.from_pretrained(
-        args.model_id,
-        quantization_config=bnb_config,
-        device_map={"": PartialState().process_index},
-        attention_dropout=args.attention_dropout,
-    )
+    # print out selected device
+    print(PartialState().process_index)
+
+    #Check for GPU availability
+    print(torch.cuda.is_available())
+    if torch.cuda.is_available():
+        print("GPU")
+        device = torch.device("cuda:0")
+
+        model = AutoModelForCausalLM.from_pretrained(
+            args.model_id,
+            quantization_config=bnb_config,
+            attention_dropout=args.attention_dropout,
+        )
+    else:
+        #Handle no GPU availiability
+        print("No GPU")
+        device = torch.device("cpu")
+        model = AutoModelForCausalLM.from_pretrained(
+            args.model_id,
+            quantization_config=bnb_config,
+            attention_dropout=args.attention_dropout,
+        )
+    
+    if torch.cuda.device_count() > 1:
+        print("Using DataParallel for multiple GPUs")
+        model = torch.nn.DataParallel(model)
+
+    
+    model.to(device)
+
     print_trainable_parameters(model)
 
+    print("Model loaded")
+
+    print("Starting Dataset")
+
+    print(args.dataset_name)
+    print(args.subset)
+    print(args.split)
+    print(token)
+    print(args.num_proc if args.num_proc else multiprocessing.cpu_count())
+    
     data = load_dataset(
         args.dataset_name,
-        data_dir=args.subset,
+        data_files=args.subset,
         split=args.split,
         token=token,
         num_proc=args.num_proc if args.num_proc else multiprocessing.cpu_count(),
     )
+
+    print('Dataset type: ', type(data))
 
     # setup the trainer
     trainer = SFTTrainer(
